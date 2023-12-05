@@ -4,7 +4,7 @@
  controla a spritesheet. Usaremos inicialmente a linha zero, 
  que representa a nave parada. */
 
-function Nave(context, teclado, imagem, imgExplosao) {
+ function Nave(context, teclado, imagem, imgExplosao) {
    this.context = context;
    this.teclado = teclado;
    this.imagem = imagem;
@@ -87,17 +87,17 @@ Nave.prototype = {
       ];
       
       // Desenhando os retângulos para visualização | Comentar após concluir modificações
-      //var ctx = this.context;
+      var ctx = this.context;
       
-      //for (var i in rets) {
-         //ctx.save();
-         //ctx.strokeStyle = 'yellow';
-         //ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, 
-              //rets[i].altura);
-         //ctx.restore();
-      //}
+      for (var i in rets) {
+         ctx.save();
+         ctx.strokeStyle = 'yellow';
+         ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, 
+                        rets[i].altura);
+         ctx.restore();
+      }
       
-      //return rets;
+      return rets;
    },//Não esquecer dessa vírgula sempre que for criar um novo método.
    colidiuCom: function(outro) {
       // Se colidiu com um Ovni...
@@ -107,8 +107,10 @@ Nave.prototype = {
          this.colisor.excluirSprite(this);
          this.colisor.excluirSprite(outro);
          
-         var exp1 = new Explosao(this.context, this.imgExplosao, this.x, this.y);
-         var exp2 = new Explosao(this.context, this.imgExplosao, outro.x, outro.y);
+         var exp1 = new Explosao(this.context, this.imgExplosao,
+                                 this.x, this.y);
+         var exp2 = new Explosao(this.context, this.imgExplosao,
+                                 outro.x, outro.y);
          
          this.animacao.novoSprite(exp1);
          this.animacao.novoSprite(exp2);
@@ -129,7 +131,7 @@ Nave.prototype = {
             }
          }
       }
-   },
+   },//Não esquecer dessa vírgula sempre que for criar um novo método.
 
    /*Na imagem 'nave-spritesheet.png' temos a nave parada, movendo-se 
    para a esquerda e movendo-se para a direita. Em uma linha, a 
