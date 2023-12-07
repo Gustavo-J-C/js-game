@@ -12,7 +12,7 @@
    this.y = 0;
    this.velocidade = 0;
    //O sprite inicia na linha 3 e coluna 2
-   this.spritesheet = new Spritesheet(context, imagem, 3, 2);
+   this.spritesheet = new Spritesheet(context, imagem, 1, 4);
    this.spritesheet.linha = 0;
    this.spritesheet.intervalo = 100;
    this.imgExplosao = imgExplosao;
@@ -91,7 +91,7 @@ Nave.prototype = {
       
       for (var i in rets) {
          ctx.save();
-         ctx.strokeStyle = 'yellow';
+         ctx.strokeStyle = 'red';
          ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, 
                         rets[i].altura);
          ctx.restore();
