@@ -8,45 +8,46 @@ var SETA_ABAIXO = 40;
 var ESPACO = 32;
 var ENTER = 13;
 
-function Teclado(elemento) {
-   this.elemento = elemento;
+class Teclado {
+   constructor(elemento) {
+      this.elemento = elemento;
 
-   // Array de teclas pressionadas
-   this.pressionadas = [];
+      // Array de teclas pressionadas
+      this.pressionadas = [];
 
-   // Array de teclas disparadas
-   this.disparadas = [];
+      // Array de teclas disparadas
+      this.disparadas = [];
 
-   // Funções de disparo registradas
-   this.funcoesDisparo = [];
+      // Funções de disparo registradas
+      this.funcoesDisparo = [];
 
-   var teclado = this;
+      var teclado = this;
 
-   //Clica e segura
-   elemento.addEventListener('keydown', function(evento) {
-      var tecla = evento.keyCode;  // Tornando mais legível ;)
-      teclado.pressionadas[tecla] = true;
+      //Clica e segura
+      elemento.addEventListener('keydown', function (evento) {
+         var tecla = evento.keyCode; // Tornando mais legível ;)
+         teclado.pressionadas[tecla] = true;
 
-      // Disparar somente se for o primeiro keydown da tecla
-      if (teclado.funcoesDisparo[tecla] && !teclado.disparadas[tecla]) {
+         // Disparar somente se for o primeiro keydown da tecla
+         if (teclado.funcoesDisparo[tecla] && !teclado.disparadas[tecla]) {
 
-          teclado.disparadas[tecla] = true;
-          teclado.funcoesDisparo[tecla] () ;
-      }
-   });
+            teclado.disparadas[tecla] = true;
+            teclado.funcoesDisparo[tecla]();
+         }
+      });
 
-   //Libera tecla
-   elemento.addEventListener('keyup', function(evento) {
-      teclado.pressionadas[evento.keyCode] = false;
-      teclado.disparadas[evento.keyCode] = false;
-   });
-}
-
-Teclado.prototype = {
-   pressionada: function(tecla) {
+      //Libera tecla
+      elemento.addEventListener('keyup', function (evento) {
+         teclado.pressionadas[evento.keyCode] = false;
+         teclado.disparadas[evento.keyCode] = false;
+      });
+   }
+   pressionada(tecla) {
       return this.pressionadas[tecla];
-   },
-   disparou: function(tecla, callback) {
+   }
+   disparou(tecla, callback) {
       this.funcoesDisparo[tecla] = callback;
    }
 }
+
+
